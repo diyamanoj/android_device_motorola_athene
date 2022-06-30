@@ -46,15 +46,12 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 
 TARGET_CPU_CORTEX_A53 := true
 
-BUILD_BROKEN_DUP_RULES := true
-
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += skip_initramfs rootwait ro init=/init root=/dev/dm-0 dm=\"system none ro,0 1 android-verity /dev/mmcblk0p47\"
 BOARD_KERNEL_CMDLINE += loop.max_part=7
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_CUSTOM_DTBTOOL := dtbTool_custom
 BOARD_DTBTOOL_ARGS := --force-v3 --motorola 1
@@ -92,18 +89,13 @@ AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 BOARD_USES_ALSA_AUDIO := true
 TARGET_USES_QCOM_MM_AUDIO := true
-USE_CUSTOM_AUDIO_POLICY := 0
-USE_XML_AUDIO_POLICY_CONF := 1
+USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_READ_ADDR_FROM_PROP := true
-
-# FM
-BOARD_HAVE_QCOM_FM := true
-TARGET_QCOM_NO_FM_FIRMWARE := true
 
 # Camera
 # Force camera module to be compiled only in 32-bit mode on 64-bit systems
@@ -138,19 +130,12 @@ TARGET_ENABLE_MEDIADRM_64 := true
 
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216        # 16384 * 1024 mmcblk0p28
-#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216    # 16384 * 1024 mmcblk0p29
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216    # 16384 * 1024 mmcblk0p29
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2600255488    # 2539312 * 1024 mmcblk0p47
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 28819456     # 28144 * 1024 mmcblk0p30
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 27258650624 # 26619776 * 1024 mmcblk0p48
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_PARTITION_SIZE := 260014080      # 253920 * 1024 mmcblk0p46
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-BOARD_ROOT_EXTRA_FOLDERS := persist
-BOARD_ROOT_EXTRA_SYMLINKS := \
-    /data/tombstones:/tombstones \
-    /vendor/dsp:/dsp \
-    /vendor/fsg:/fsg \
-    /vendor/firmware_mnt:/firmware
 
 # FM
 BOARD_HAVE_QCOM_FM := true
@@ -162,8 +147,8 @@ TARGET_LD_SHIM_LIBS := \
     /vendor/lib/hw/camera.msm8952.so|libshims_camera.so
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_athene
-TARGET_RECOVERY_DEVICE_MODULES := //$(DEVICE_PATH):libinit_athene
+TARGET_INIT_VENDOR_LIB := libinit_athene
+TARGET_RECOVERY_DEVICE_MODULES := libinit_athene
 
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
@@ -218,12 +203,6 @@ TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 # CNE and DPM
 BOARD_USES_QCNE := true
 
-# DATA IPA CFG MGR
-USE_DEVICE_SPECIFIC_DATA_IPA_CFG_MGR := true
-
-#Netd	
-TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
-
 # Sensors
 USE_SENSOR_MULTI_HAL := true
 BOARD_USES_MOT_SENSOR_HUB := true
@@ -253,9 +232,8 @@ VENDOR_SECURITY_PATCH := 2018-12-01
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)/releasetools
 
 # SELinux
-#include device/qcom/sepolicy-legacy/sepolicy.mk
-#BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/legacy
+#include device/qcom/sepolicy/sepolicy.mk
+#BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/vendor/sepolicy
 
 # Power
 TARGET_CLUSTER_SWITCHED_PLACES := true
@@ -280,5 +258,4 @@ PRODUCT_VENDOR_MOVE_ENABLED := true
 TARGET_DISABLE_WCNSS_CONFIG_COPY := true
 WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
-WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X

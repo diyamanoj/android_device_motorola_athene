@@ -22,7 +22,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_m.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# Inherit some common Lineage stuff.
+# Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit from athene device
@@ -43,17 +43,13 @@ PRODUCT_MANUFACTURER := Motorola
 BOARD_VENDOR := motorola
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-	PRIVATE_BUILD_DESC="coral-user 11 RQ1A.201205.008 6943376 release-keys" \
+	PRIVATE_BUILD_DESC="athene_f-user 8.1.0 OPJ28.111 22 release-keys" \
 	PRODUCT_NAME="athene" \
-	TARGET_DEVICE="athene" \
-	DEVICE_MAINTAINERS="GhostReborn"
+	TARGET_DEVICE="athene"
 
 PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
 
-#Lawncahir remove
-TARGET_EXCLUDE_LAWNCHAIR := true
-
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
-BUILD_FINGERPRINT := google/taimen/taimen:8.1.0/OPM1.171019.021/4565141:user/release-keys
-BUILD_DESCRIPTION := taimen-user 8.1.0 OPM1.171019.021 4565141 release-keys
+BUILD_FINGERPRINT := motorola/athene/athene:7.0/NPJS25.93-14-13/3:user/release-keys
+VENDOR_BUILD_FINGERPRINT := motorola/athene/athene:7.0/NPJS25.93-14-13/3:user/release-keys

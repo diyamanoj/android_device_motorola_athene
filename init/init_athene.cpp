@@ -50,9 +50,8 @@ void property_override(char const prop[], char const value[])
         __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
-void property_override_triple(char const product_prop[], char const system_prop[], char const vendor_prop[], char const value[])
+void property_override_dual(char const system_prop[], char const vendor_prop[], char const value[])
 {
-    property_override(product_prop, value);
     property_override(system_prop, value);
     property_override(vendor_prop, value);
 }
@@ -66,6 +65,10 @@ void vendor_load_properties()
     std::string radio;
     std::string device;
     std::string carrier;
+
+    platform = android::base::GetProperty("ro.board.platform", "");
+    if (platform != ANDROID_TARGET)
+        return;
 
     device_boot = android::base::GetProperty("ro.boot.device", "");
     property_set("ro.hw.device", device_boot.c_str());
@@ -84,13 +87,13 @@ void vendor_load_properties()
 
     if (device_boot == "athene_13mp") {
         /* Moto G4 (XT162x) */
-        property_override_triple("ro.product.device", "ro.product.system.device", "ro.product.vendor.device", "athene");
-        property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", "Moto G4");
+        property_override_dual("ro.product.device", "ro.product.vendor.device", "athene");
+        property_override_dual("ro.product.model", "ro.product.vendor.model", "Moto G4");
         property_set("ro.telephony.default_network", "10");
     } else {
         /* Moto G4 Plus (XT164x) */
-        property_override_triple("ro.product.device", "ro.product.system.device", "ro.product.vendor.device", "athene_f");
-        property_override_triple("ro.product.model", "ro.product.system.model", "ro.product.vendor.model", "Moto G4 Plus");
+        property_override_dual("ro.product.device", "ro.product.vendor.device", "athene_f");
+        property_override_dual("ro.product.model", "ro.product.vendor.model", "Moto G4 Plus");
         property_set("ro.telephony.default_network", "10,0");
     }
 
@@ -115,13 +118,6 @@ void vendor_load_properties()
         property_set("persist.radio.is_wps_enabled", "true");
         property_set("persist.radio.pb.max.match", "10");
     }
-	    // Magisk Hide
-    property_override("ro.boot.verifiedbootstate", "green");
-    property_override("ro.oem_unlock_supported", "0");
-    property_override("ro.boot.vbmeta.device_state", "locked");
-    property_override("ro.boot.veritymode", "enforcing");
-    property_override("ro.build.type", "user");
-    property_override("ro.build.tags", "release-keys");
 }
 
 /* Target-Specific Dalvik Heap & HWUI Configuration */

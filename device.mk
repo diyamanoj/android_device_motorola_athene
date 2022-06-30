@@ -28,10 +28,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 # Screen density
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-#Remove packages
-PRODUCT_PACKAGES += \
-    removepackages
-
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -62,21 +58,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 
-# Motorola Camera permissions
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/camera/com.motorola.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.motorola.camera.xml \
-    $(LOCAL_PATH)/configs/camera/com.motorola.cameraone.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.motorola.cameraone.xml \
-
 # External camera
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/camera/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
-
-# APEX
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/ld.config.txt:$(TARGET_COPY_OUT_SYSTEM)/etc/swcodec/ld.config.txt
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -96,37 +83,25 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.primary.msm8952 \
-	android.hidl.manager-V1.0-java
+    audio.primary.msm8952
 
 PRODUCT_COPY_FILES +=  \
-    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-    $(LOCAL_PATH)/configs/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/configs/audio/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
-    $(LOCAL_PATH)/configs/audio/ap_gain.bin:$(TARGET_COPY_OUT_VENDOR)/etc/ap_gain.bin \
-    $(LOCAL_PATH)/configs/audio/ap_gain_mmul.bin:$(TARGET_COPY_OUT_VENDOR)/etc/ap_gain_mmul.bin \
-    $(LOCAL_PATH)/configs/audio/audio_ext_spkr.conf:$(TARGET_COPY_OUT_VENDOR)/audio_ext_spkr.conf \
-    $(LOCAL_PATH)/configs/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)sound_trigger_mixer_paths.xml \
-    $(LOCAL_PATH)/configs/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/sound_trigger_platform_info.xml \
-    $(LOCAL_PATH)/configs/audio/audio_platform_info_extcodec.xml:$(TARGET_COPY_OUT_VENDOR)/audio_platform_info_extcodec.xml
-
-PRODUCT_COPY_FILES += \
-    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
-    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
+    $(LOCAL_PATH)/configs/audio/audio_effects.xml:system/vendor/etc/audio_effects.xml \
+    $(LOCAL_PATH)/configs/audio/audio_platform_info.xml:system/vendor/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/vendor/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/vendor/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/configs/audio/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
+    $(LOCAL_PATH)/configs/audio/ap_gain.bin:system/etc/ap_gain.bin \
+    $(LOCAL_PATH)/configs/audio/ap_gain_mmul.bin:system/etc/ap_gain_mmul.bin \
+    $(LOCAL_PATH)/configs/audio/audio_ext_spkr.conf:system/etc/audio_ext_spkr.conf \
+    $(LOCAL_PATH)/configs/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
+    $(LOCAL_PATH)/configs/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
+    $(LOCAL_PATH)/configs/audio/audio_platform_info_extcodec.xml:system/etc/audio_platform_info_extcodec.xml
 
 # Camera
 PRODUCT_PACKAGES += \
     libbson \
-    libshims_camera \
-    Snap
-
-PRODUCT_PACKAGES += \
-    Doze
+    libshims_camera
 
 # Disable camera Treble path
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -178,13 +153,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/lowi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/lowi.conf \
     $(LOCAL_PATH)/gps/etc/xtwifi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtwifi.conf
 
-# IPA Manager
-PRODUCT_PACKAGES += \
-    ipacm \
-    IPACM_cfg.xml \
-    libipanat \
-    liboffloadhal
-
 # IRSC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
@@ -195,11 +163,8 @@ PRODUCT_COPY_FILES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    ims-ext-common_system \
+    ims-ext-common \
     libshims_ims
-
-PRODUCT_BOOT_JARS += \
-    ims-ext-common_system
 
 # Keystore
 PRODUCT_PACKAGES += \
@@ -268,9 +233,9 @@ PRODUCT_PACKAGES += \
     libstagefright_soft_flacdec
 
 # Perf
-#PRODUCT_BOOT_JARS += \
-#    QPerformance \
-#    UxPerformance
+PRODUCT_BOOT_JARS += \
+    QPerformance \
+    UxPerformance
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perf/commonresourceconfigs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/commonresourceconfigs.xml \
@@ -289,7 +254,7 @@ PRODUCT_COPY_FILES += \
 
 # Qualcomm broadcast whitelist
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/privapp-permissions-qti.xml:system/etc/permissions/privapp-permissions-qti.xml \
+	$(LOCAL_PATH)/configs/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/privapp-permissions-qti.xml \
 	$(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
 
 # Ramdisk
@@ -300,7 +265,11 @@ PRODUCT_PACKAGES += \
     init.oem.hw.sh \
     init.qcom.power.rc \
     init.qcom.rc \
+    init.lk.sh \
     ueventd.qcom.rc
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/init.lk.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.lk.sh
 
 # Releasetools script
 PRODUCT_COPY_FILES += \

@@ -114,8 +114,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	debug.enable.sglscale=1 \
 	ro.opengles.version=196610 \
 	ro.sf.lcd_density=480 \
-	debug.hwui.use_buffer_age=false \
-	debug.sf.enable_gl_backpressure=1
+	debug.hwui.use_buffer_age=false
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -249,10 +248,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.radio.apm_sim_not_pwdn=1 \
 	persist.vendor.radio.lte_vrte_ltd=1 \
 	persist.vendor.radio.cs_srv_type=1 \
-
-# Rescue party
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.disable_rescue=true
+	persist.vendor.radio.jbims=1
 
 # RmNet Data
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -270,13 +266,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.data.mode=concurrent \
 	persist.vendor.data.mode=concurrent \
 	persist.data.iwlan.enable=true
-
-# SurfaceFlinger
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.protected_contents=true \
-    ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
-    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000 \
-    ro.surface_flinger.use_color_management=true
 
 #Trim properties
 PRODUCT_PROPERTY_OVERRIDES += \

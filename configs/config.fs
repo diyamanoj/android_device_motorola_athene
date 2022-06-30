@@ -23,13 +23,13 @@ value:2951
 value:2952
 
 [vendor/bin/imsdatadaemon]
-user: AID_RADIO
-group: AID_RADIO
+user: AID_SYSTEM
+group: AID_SYSTEM
 mode: 0755
 caps: NET_BIND_SERVICE
 
 [vendor/bin/ims_rtp_daemon]
-user: AID_RADIO
+user: AID_SYSTEM
 group: AID_RADIO
 mode: 0755
 caps: NET_BIND_SERVICE
@@ -39,12 +39,6 @@ user: AID_SYSTEM
 group: AID_SYSTEM
 mode: 0755
 caps: NET_BIND_SERVICE
-
-[vendor/bin/mm-qcamera-daemon]
-mode: 0700
-user: AID_CAMERA
-group: AID_SHELL
-caps: SYS_NICE
 
 [vendor/bin/loc_launcher]
 mode: 0755
